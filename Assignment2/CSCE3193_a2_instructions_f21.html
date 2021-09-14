@@ -1,0 +1,497 @@
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<style>
+		.toc {
+			margin-left: 30px;
+		}
+		.code {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+		.shell {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+	</style>
+</head>
+<body bgcolor="#d8ccdb"><br><br>
+<table align="center" cellpadding="50" border="1" bgcolor="#e8dceb" width="620"><tbody><tr><td>
+
+<h1>Assignment 2 - Java Basics</h1>
+
+<ol>
+	<li><b>Now, let's move on to some code with a graphical interface.</b> Download starter.zip from Blackboard.
+		Unzip it. On Linux, the command is:
+<pre class="code">
+unzip starter.zip
+</pre>
+		(It is recommended you learn to use the shell for simple tasks, like zipping and unzipping folders, instead of some graphical program.
+		Graphical tools are very difficult to use in scripts. Those who learn to use the shell can automate such tasks.
+		In software development, automation is <b><u>very</u></b> important.)<br><br>
+
+		Now, build and run this program.  You should notice that I included both the .bash and .bat build files.  You will only need to use one of them, 
+		depending on your operating system. 
+		You should see a button. When you push the button, it prints something in the console window.
+		</li><br><br>
+
+	<li><b>Examine Game.java</b>.
+		Observe the following points. If any of these points are unclear, use a search engine find some information to help you understand it better:
+		<ul>
+			<li>Java programs begins in "main".</li>
+			<li>The main function makes a "new Game" object. That means it allocates a portion of memory big enough to hold an instance of "Game".</li>
+			<li>We call such allocated portions of memory "class instances" or "objects".</li>
+			<li>When you make a new object, it implicitly calls the constructor. A constructor is a method with the same name as the class.
+				The usual purpose of a constructor is to initialize the values in a new object.</li>
+			<li>The Game constructor makes two local variables named "controller" and "view".
+				A variable is a reference (or pointer) to some place in memory.
+				In this case, these variables reference two new objects of type "Controller" and "View".</li>
+			<li>Note that it is a common convention to start type names with a capital letter and to start
+				variable names with a lowercase letter.</li>
+			<li>"this" refers to the object that is being initialized by the constructor.</li>
+			<li>Notice that the Game class extends JFrame. JFrame is a class that comes with the Java class library.
+				By extending JFrame, the Game class inherits all the methods and member variables in the JFrame class.
+				A JFrame is the frame around a graphical program.
+				It is basically basically a window with a close button and a maximize button.</li>
+		</ul>
+		</li><br><br>
+
+	<li><b>Examine View.java</b>.
+		Observe the following points. An important part of this exercise is learning the language that I will use to
+		communicate with you about Java code. So, read these points carefully and try to understand.
+		Again, using a search engine is a good idea:
+		<ul>
+			<li>View extends JPanel. A JPanel represents the big gray area inside the JFrame.
+				It is the place where the graphical components of your program go.</li>
+			<li>The View class has a member variable of type "JButton", named "b1".
+				A member variable is a variable stored in an object.</li>
+			<li>Notice that the View constructor requires a parameter.
+				This parameter is passed to it when a "new View()" is instantiated.</li>
+			<li>The View constructor instantiates a new JButton and uses the member variable, b1, to reference this new object.</li>
+			<li>The method "addActionListener" is a member of the JButton class.
+				This method tells the button which object will handle the event that occurs when someone presses the button.
+				We will use our controller object to handle this event, so we pass a reference to our controller object to the addActionListener method.</li>
+			<li>We also add b1 to "this" object, meaning we add the button to the panel. If you don't do that, it won't appear in the window.</li>
+		</ul>
+		</li><br><br>
+
+	<li><b>Examine Controller.java</b>.
+		Here are some points to observe:
+		<ul>
+			<li>This class "implements ActionListener". That means "This class is capable of handling ActionEvents,
+				such as when someone pushes a button." In order to implement ActionListener, a class must provide a method named
+				"actionPerformed", which is the method that will handle the event.</li>
+			<li>The "actionPerformed" method just prints a silly message to the console.
+				"System" is a class provided by the Java class library that provides some important system functionality.
+				"out" is a reference to an object that represents where text will be printed.
+				By default, "out" is connected to your console, but it is possible to redirect it to go to other places.</li>
+		</ul>
+		</li><br><br>
+
+	<li><b>Make the button remove itself</b> when you press it.
+		Change the text of the button to something else. (I do not care what you change it to.)<br><br>
+
+		It is highly recommended that you build and run after every little change that you make.
+		That way, if the code breaks, you won't have to guess about which change is responsible.
+		Also, it doesn't hurt to make full backups at regular intervals.<br><br>
+
+		In the Controller class (in Controller.java), add a member variable to reference the View:
+<pre class="code">
+	View view;
+</pre>
+		(If you need an example, the View class has a member variable in it that you can look at.
+		Generally, you should put all of the member variables at the top of the class, before the methods.
+		The constructor is usually the first method after the member variables.
+		However, you can put things wherever you want, as long as it works.)
+		<br><br>
+
+		Add a method to the Controller class that lets the caller set the object that "view" references.
+<pre class="code">
+	void setView(View v)
+	{
+		view = v;
+	}
+</pre>
+		Call that setter method from the View constructor:
+<pre class="code">
+		c.setView(this);
+</pre>
+		Now, the view and controller objects both have references to each other.<br><br>
+
+		Add a method to the View class that removes the button:
+<pre class="code">
+	void removeButton()
+	{
+		this.remove(b1);
+		this.repaint();
+	}
+</pre>
+		Finally, change the behavior of the button so that it removes itself. So replace this line,
+<pre class="code">
+		System.out.println("Hey! I said not to push that button!");
+</pre>
+		with
+<pre class="code">
+		view.removeButton();
+</pre>
+		When you run the program, you should see that pushing the button makes it disappear.
+		</li><br><br>
+
+	<li><b>Load a turtle image and change the background color of the View</b>.
+		Download turtle.png from Blackboard and save it in the folder with your code. Add a member variable to your view to reference this image:
+<pre class="code">
+	BufferedImage turtle_image;
+</pre>
+		Add the following code to the View constructor to load this image from disk:
+<pre class="code">
+		try
+		{
+			this.turtle_image =
+				ImageIO.read(new File("turtle.png"));
+		} catch(Exception e) {
+			e.printStackTrace(System.err);
+			System.exit(1);
+		}
+</pre>
+		But, where is the turtle?
+		Well, we loaded it into memory, but we never actually told the program to draw it.
+		So, right now, it's just filling up some memory.
+		(Computers are not generally intelligent.
+		They do not do obvious things unless they are explicitly instructed to do them.)<br><br>
+
+		Add a method to the View class that will draw it:
+<pre class="code">
+	public void paintComponent(Graphics g)
+	{
+		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		g.drawImage(this.turtle_image, 50, 200, null);
+	}
+</pre>
+		paintComponent is already a method in the JPanel class, which the View class extends.
+		By putting this method in your View class, you are overriding the one in JPanel,
+		so it calls yours instead.<br><br>
+
+		Notice that the background is now black. Let's change it to a cyan color by inserting this line
+<pre class="code">
+		g.setColor(new Color(128, 255, 255));
+</pre>
+		just before the call to "g.fillRect". Now, when you build, you might get the following compiler error:
+<pre class="code">
+View.java:31: error: cannot find symbol
+		g.setColor(new Color(128, 255, 255));
+		               ^
+  symbol:   class Color
+  location: class View
+1 error
+</pre>
+		It cannot find the symbol "Color" because we have not told it where to look.
+		Add this line near the top of the file:
+<pre class="code">
+import java.awt.Color;
+</pre>
+		This line tells it that the "Color" symbol is found in the namespace "java.awt".
+		A "namespace" is a hierarchical system that Java uses to keep all of its classes organized.
+		Now the program should build without errors, and when you run, you will have a Cyan background.
+
+		</li><br><br>
+
+	<li><b>Make a new class to represent the state of the game and draw the turtle</b>.
+		Add a new file to your project named "Model.java". Put the following contents in this file:
+<pre class="code">
+class Model
+{
+	int turtle_x;
+	int turtle_y;
+	int dest_x;
+	int dest_y;
+
+	Model()
+	{
+	}
+
+	public void update()
+	{
+		// Move the turtle
+		if(this.turtle_x &lt; this.dest_x)
+			this.turtle_x += 1;
+		else if(this.turtle_x &gt; this.dest_x)
+			this.turtle_x -= 1;
+		if(this.turtle_y &lt; this.dest_y)
+			this.turtle_y += 1;
+		else if(this.turtle_y &gt; this.dest_y)
+			this.turtle_y -= 1;
+	}
+
+	public void setDestination(int x, int y)
+	{
+		this.dest_x = x;
+		this.dest_y = y;
+	}
+}
+</pre>
+		Add "Model.java" to the list of files that your build script builds.<br><br>
+
+		In the Game constructor, instantiate a new Model object.
+		Also, in Controller, add a member variable to reference the Model object:
+<pre class="code">
+	Model model;
+</pre>
+		Add a new parameter of type Model to the Controller constructor,
+		and use it to initialize the "model" member variable:
+<pre class="code">
+	Controller(Model m)
+	{
+		model = m;
+	}
+</pre>
+		Also, add this method to your controller:
+<pre class="code">
+	void update()
+	{
+	}
+</pre>
+		Now, if you try to build, it will tell you:
+<pre class="code">
+Game.java:11: error: constructor Controller in class Controller
+		cannot be applied to given types;
+		Controller controller = new Controller();
+		                        ^
+  required: Model
+  found: no arguments
+  reason: actual and formal argument lists differ in length
+</pre>
+		This means there is a problem in Game.java on line 11.
+		(It might be a different line number for you.)
+		The problem is that the Controller constructor requires one parameter value, but you are currently supplying zero.
+		(You are supposed to be able to determine that by reading the error message.
+		In this case, the error message is not worded very clearly, so it helps to have some experience reading error messages.
+		Start building that experience now by carefully reading the error messages that go with each problem that you fix.
+		Don't just be happy to get it working--a little time spent learning to understand the compiler will pay off in the long run.)
+		Now, fix this problem by passing the model object when you instantiate your controller:
+<pre class="code">
+	public Game()
+	{
+		Model model = new Model();
+		Controller controller = new Controller(<font color="red">model</font>);
+</pre>
+		The View is also going to need a reference to the model.
+		So, go ahead and do that, just like you did with the Controller:
+		add a member variable of type Model to your View and initialize it by passing a model object to the View constructor.
+		<br><br>
+		Adjust the paintComponent method to draw the turtle where the model says the turtle is located:
+<pre class="code">
+g.drawImage(this.turtle_image, model.turtle_x, model.turtle_y, null);
+</pre>
+		<br><br>
+		Change the title of the JFrame to "Turtle attack!"<br><br>
+		</li><br><br>
+
+	<li><b>Animate it</b>.
+		Then, add the following method to your Game class:
+<pre class="code">
+public void run()
+{
+	while(true)
+	{
+		controller.update();
+		model.update();
+		view.repaint(); // Indirectly calls View.paintComponent
+		Toolkit.getDefaultToolkit().sync(); // Updates screen
+
+		// Go to sleep for 50 miliseconds
+		try
+		{
+			Thread.sleep(50);
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+		System.out.println("hi"); // remove this line
+	}
+}
+</pre>
+		When you build, now, you will get an error about "cannot find symbol".
+		Read that error message and see if you can figure out what it is saying.
+		(Especially note the line number and the name of the symbol it cannot find.)
+		<br><br>
+		...
+		<br><br>
+		Okay, I'll tell you what it means.
+		It is saying that you cannot access "model" or "view" here, because those variables were declared in a different place.
+		Now, see if you can figure out how to fix this problem.
+		(If you can't figure it out, scroll way down.)
+		<br><br>
+		Call your run method:
+<pre class="code">
+public static void main(String[] args)
+{
+	Game g = new Game();
+	<font color="red">g.run();</font>
+}
+</pre>
+		Now it will redraw the view every 50 miliseconds.
+		(1000 miliseconds-per-second / 50 miliseconds-per-event = 20 frames-per-second).
+		Change it to update at a rate of 25 frames per second.<br><br>
+
+		However, it is difficult to tell that it is drawing many times per second because nothing moves.
+		So, let's fix that.
+		Make your Controller class also implement the MouseListener interface:
+<pre class="code">
+class Controller implements ActionListener, MouseListener
+{
+</pre>
+		and add the following methods:
+<pre class="code">
+	public void mousePressed(MouseEvent e)
+	{
+		model.setDestination(e.getX(), e.getY());
+	}
+
+	public void mouseReleased(MouseEvent e) {    }
+	public void mouseEntered(MouseEvent e) {    }
+	public void mouseExited(MouseEvent e) {    }
+	public void mouseClicked(MouseEvent e) {    }
+</pre>
+		and add this line to your Game constructor to tell it that the Controller is in charge of handling mouse clicks
+<pre class="code">
+		view.addMouseListener(controller);
+</pre>
+		Now, when you build and run, you should see that you can control the turtle by clicking
+		somewhere inside the window. The turtle should move to the location where you clicked.
+		(If the animation appears jerky, try wiggling your mouse inside the window.
+		Some Java virtual machines try to reduce computational requirements by skipping screen refreshes.
+		When the mouse moves, however, they know you are watching, so they don't try to get away with that.)
+		</li><br><br>
+
+	<li><b>Let's give it keyboard controls too.</b>
+		Start by making Controller implement the KeyListener interface.
+<pre class="code">
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+<font color="red">import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;</font>
+
+class Controller implements ActionListener, MouseListener<font color="red">, KeyListener</font>
+</pre>
+		Then, add these member variables,
+<pre class="code">
+	boolean keyLeft;
+	boolean keyRight;
+	boolean keyUp;
+	boolean keyDown;
+</pre>
+		and these methods:
+<pre class="code">
+	public void keyPressed(KeyEvent e)
+	{
+		switch(e.getKeyCode())
+		{
+			case KeyEvent.VK_RIGHT: keyRight = true; break;
+			case KeyEvent.VK_LEFT: keyLeft = true; break;
+			case KeyEvent.VK_UP: keyUp = true; break;
+			case KeyEvent.VK_DOWN: keyDown = true; break;
+		}
+	}
+
+	public void keyReleased(KeyEvent e)
+	{
+		switch(e.getKeyCode())
+		{
+			case KeyEvent.VK_RIGHT: keyRight = false; break;
+			case KeyEvent.VK_LEFT: keyLeft = false; break;
+			case KeyEvent.VK_UP: keyUp = false; break;
+			case KeyEvent.VK_DOWN: keyDown = false; break;
+		}
+	}
+
+	public void keyTyped(KeyEvent e)
+	{
+	}
+
+	void update()
+	{
+		if(keyRight) model.dest_x++;
+		if(keyLeft) model.dest_x--;
+		if(keyDown) model.dest_y++;
+		if(keyUp) model.dest_y--;
+	}
+</pre>
+		Also, add this line to your Game constructor to tell it that the Controller is in charge of handling key events:
+<pre class="code">
+		this.addKeyListener(controller);
+</pre>
+		</li><br><br>
+
+	<li><b>Make the turtle move 4 times faster</b> by changing each "1" in Model.java to "4".
+			Tweak the code so that the turtle does not overshoot its destination, then jump back and forth trying to get there.
+			For example, instead of always moving 4 pixels to the right, like this:
+<pre class="code">
+turtle_x += 4;
+</pre>
+				you could move 4 pixels to the right, or the distance to the destination, whichever is smaller, like this:
+<pre class="code">
+turtle_x += Math.min(4, dest_x - turtle_x);
+</pre>
+				(Do something similar for moving left, up, or down.)</li>
+		</li><br><br>
+
+	<li><b>Clean up your code</b>.
+		Add your name, date, and assignment description at the top of each of the .java files.
+		Make sure your tabulations are consistent.  
+		Add comments, so you will remember what various things do (for your own benefit--we are not going to check for this).
+		It is a good idea to group your code into "blocks" separated by blank lines,
+		such that each block of lines performs one task.
+		Then you can start each block with a comment describing the one task that the block performs.
+		If a particular line within a "block" requires annotation, add a comment for that line at the end of the line.
+		Future assignments will build on top of this one, so it is worth your time to keep your code clean.
+		Also, future assignments will not provide nearly as explicit instructions as this one, so be sure you understood what you did.
+		</li><br><br>
+
+
+	<li><b>Submit your code.</b>
+		Make a zip archive containing a folder with only your source code in it.  If you don't know how to make a zip archive on your favorite operating system, try using Google to find some instructions.<br><br>
+		
+		The zip archive should contain exactly six files: Game.java, Model.java, View.java,
+		Controller.java, your build script, and turtle.png.  It should <b><u>NOT</u></b> contain any generated files. For example, it should not contain any files with a ".class" extension.
+		The build script should be named "build.bash" or "build.bat".<br><br>
+		
+		Before you submit your archive file, make sure it still works. Try unzipping your archive into another folder.  Make sure it only contains the files expected.
+		Run your script. Did it work?
+		If not, figure out what is wrong and fix it. If your code does not work, the graders will not debug it--that's your job.
+		Finally, go the course web site on Blackboard (<a href="https://learn.uark.edu">https://learn.uark.edu/</a>) and submit your zip archive for Assignment2.
+	</li><br><br>
+
+</ol>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<font color="gray">
+<h3>Answer to the challenge in step 8:</h3>
+Local variables cannot be accessed in other methods.
+Member variables, however, can be accessed anywhere in the class.
+So, you need to change "model" and "view" to be member variables instead of local variables.
+Here is an example of a local variable:
+<pre class="code">
+class Game
+{
+	public Game()
+	{
+		<font color="red">Model model</font> = new Model();
+</pre>
+		Here is an example of a member variable:
+<pre class="code">
+class Game
+{
+	<font color="red">Model model;</font>
+
+	public Game()
+	{
+		model = new Model();
+</pre>
+You need to make a similar change for "view" as well.</font>
+</td></tr></table>
+</body></html>
+
