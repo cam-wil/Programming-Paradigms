@@ -77,7 +77,7 @@ class Controller implements ActionListener, MouseListener, KeyListener
 			case KeyEvent.VK_DOWN:
 				keyDown = false;
 				break;
-			case KeyEvent.VK_Q:
+			case KeyEvent.VK_C:
 				model.clearBricks();
 				break;
 			case KeyEvent.VK_S:

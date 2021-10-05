@@ -49,6 +49,7 @@ class Model
     public void clearBricks()
     {
         bricks = new ArrayList<Brick>();
+        System.out.println("Bricks cleared...");
     }
 
     // create a json "object" from our bricks arraylist
@@ -63,19 +64,28 @@ class Model
             lst.add(bricks.get(i).Marshal());
         }
         ob.save("map.json");
+        System.out.println("File saved...");
     }
 
     // populate our bricks arraylist from a json file
     public void UnMarshal()
     {
-        Json ob = Json.load("map.json");
-        Json lst = ob.get("bricks");
-
-        bricks = new ArrayList<Brick>();
-
-        for(int i = 0; i < lst.size(); i++)
+        try
         {
-            bricks.add(new Brick(lst.get(i)));
+            Json ob = Json.load("map.json");
+            Json lst = ob.get("bricks");
+
+            bricks = new ArrayList<Brick>();
+
+            for(int i = 0; i < lst.size(); i++)
+            {
+                bricks.add(new Brick(lst.get(i)));
+            }
+            System.out.println("File loaded...");
+        } catch (Exception e)
+        {
+            System.out.println("Failed to open file...");
         }
+        
     }
 }
