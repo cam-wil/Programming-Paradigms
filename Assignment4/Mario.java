@@ -16,6 +16,7 @@ class Mario {
     double vert_velocity = 0.0;
     Model model;
     int head, feet, left, right;
+    boolean backwards = false;
 
     static BufferedImage mario_image[] = null;
 	int image_index = 0;
@@ -103,7 +104,15 @@ class Mario {
     public void Draw(Graphics g)
     {
         if(image_index > 4) image_index = 0;
-        g.drawImage(mario_image[image_index], this.x, this.y , 60, 95, null);
+
+        if(this.backwards)
+        {
+            g.drawImage(mario_image[image_index], this.x + this.w , this.y ,  -this.w , 95, null);
+        }    
+        else  
+        {
+            g.drawImage(mario_image[image_index], this.x, this.y , 60, 95, null);
+        }  
     }
 
     // handles all of marios events

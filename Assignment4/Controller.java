@@ -17,6 +17,7 @@ class Controller implements ActionListener, MouseListener, KeyListener
 	Model model;
 	private boolean keyLeft, keyRight, keyUp, keyDown;
 	boolean editing = false;
+	boolean backwards = false;
 
 	// default constructor
 	Controller(Model m)
@@ -47,9 +48,11 @@ class Controller implements ActionListener, MouseListener, KeyListener
 		switch(e.getKeyCode())
 		{
 			case KeyEvent.VK_RIGHT:
+				model.mario.backwards = false;
 				keyRight = true;
 				break;
 			case KeyEvent.VK_LEFT:
+				model.mario.backwards = true;
 				keyLeft = true;
 				break;
 			case KeyEvent.VK_UP:

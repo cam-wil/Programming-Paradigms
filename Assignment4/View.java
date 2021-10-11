@@ -17,7 +17,7 @@ class View extends JPanel
 {
 	Model model;
 
-	BufferedImage background;
+	static BufferedImage background;
 
 	// default constructor
 	View(Controller c, Model m)
@@ -31,7 +31,7 @@ class View extends JPanel
 	// static method to handle loading images and return them
 	static BufferedImage loadImage(String fn)
 	{
-		BufferedImage image = (null);
+		BufferedImage image = null;
 		try 
 		{
 			image = ImageIO.read( new File(fn));
