@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>Cameron Wilson's Page</title>
+        <meta charset="UTF-8">
+    </head>
+    <body style="background-color: #8489c9;">
+        <script>
+
+            // function to reset all answers
+            function reset() {
+                document.getElementById("answer1").innerHTML = ""
+                document.getElementById("answer2").innerHTML = ""
+                document.getElementById("answer3").innerHTML = ""
+            }
+
+            // function to grade question 1
+            function q1(id) {
+                if(id === '1a') {document.getElementById("answer1").innerHTML = "Correct - this is the General Dynamics F-16 Fighting Falcon better known as the \"Viper\""}
+                if(id === '1b') {document.getElementById("answer1").innerHTML = "Wrong - This is an C130"}
+                if(id === '1c') {document.getElementById("answer1").innerHTML = "Wrong - This is an A10"}
+            }
+
+            // function to grade question 2
+            function q2(id) {
+                if(id === '2a') {document.getElementById("answer2").innerHTML = "Wrong - This is very fast, but the F15 Eagle is not near the fastest human piloted jet"}
+                if(id === '2b') {document.getElementById("answer2").innerHTML = "Wrong - This is the fastest propellor driven airplane the XF-84H Thunderscreech"}
+                if(id === '2c') {document.getElementById("answer2").innerHTML = "Correct! The Lockheed YF-12 (first flight 1963) took this title."}
+            }
+
+            // function to grade question 3
+            function q3(id) {
+                if(id === '3a') {document.getElementById("answer3").innerHTML = "Correct! The German Messerschmitt Me 262 was the first operational fighter aircraft. It entered service in April 1944."}
+                if(id === '3b') {document.getElementById("answer3").innerHTML = "Wrong - close! The Gloster Meteor entered service in July 1944."}
+                if(id === '3c') {document.getElementById("answer3").innerHTML = "Wrong - The Lockheed P-80 entered service in late 1945. Was retired in 1959."}
+            }
+        </script>
+
+        <h1>Cameron Wilson's Page</h1>
+        <br>
+        <span id="info">
+            <h3>Info</h3>
+            This site has a 3 question quiz about military aviation. A brief history of military aviation can be found <a href="https://en.wikipedia.org/wiki/Military_aviation" target="_blank">HERE</a>.
+            <br> Aviation has been a strategic part of military operations since it has existed. Originally balloons and low power 
+            <br> biplanes were used for observation and eventually used for bombing and later were equpped with guns, missiles, 
+            <br> and electronic equpment. Not all military operations are used in battle, however, most missions involving the
+            <br> use of aircraft are humanitarian or training in nature. My favorite aircraft, the Lockheed A-12 
+            <br> (variants YF-12 and SR-71) had no offensive capabilities at all - only cameras and electronic
+            <br> logging equipment.         
+            <br>
+            <br>
+            
+        </span>
+        
+        <span id="q1">
+            <h3>Quiz</h3>
+            <br>
+            Which of the following is an F16?
+            <br>
+            <span id="1a" onclick="q1(this.id)">a) <br> <img src="f16.png" style="width: 20%; height: auto;"> </span>
+            <br>
+            <span id="1b" onclick="q1(this.id)">b) <br> <img src="c130.png" style="width: 20%; height: auto;"> </span>
+            <br>
+            <span id="1c" onclick="q1(this.id)">c) <br> <img src="a10.png" style="width: 20%; height: auto;"> </span>
+            <br>
+            <span id="answer1"></span>
+            <br>
+            <br>
+        </span>
+        
+        <span id="q2">
+            How fast is the fastest human piloted air-breathing aircraft (not a rocket) ever built?
+            <br>
+            <span id="2a" onclick="q2(this.id)">a) 1,650 mph</span>
+            <br>
+            <span id="2b" onclick="q2(this.id)">b) 623 mph</span>
+            <br>
+            <span id="2c" onclick="q2(this.id)">c) 2,275 mph</span>
+            <br>
+            <span id="answer2"></span>
+            <br>
+            <br>
+        </span>
+
+        <span id="q3">
+            During WWII which country built the first <b>operational</b> jet fighter?
+            <br>
+            <span id="3a" onclick="q3(this.id)">a) Germany</span>
+            <br>
+            <span id="3b" onclick="q3(this.id)">b) United Kingdom (Britain)</span>
+            <br>
+            <span id="3c" onclick="q3(this.id)">c) United States</span>
+            <br>
+            <span id="answer3"></span>
+            <br>
+            <br>
+        </span>
+
+        <span id="footer">
+            <button type="button" onclick="reset()">Reset</button>
+        </span>
+    </body>
+</html>
