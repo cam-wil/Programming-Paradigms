@@ -1,0 +1,198 @@
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<style>
+		.toc {
+			margin-left: 30px;
+		}
+		.code {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+		.shell {
+			margin-left: 30px;
+			color:#000000;
+			background-color:#ffffff;
+		}
+	</style>
+</head>
+<body bgcolor="#d8ccdb"><br><br>
+<table align="center" cellpadding="50" border="1" bgcolor="#e8dceb" width="620"><tbody><tr><td>
+
+<h1>Homework 5 - Polymorphism</h1>
+
+<ol>
+	<li>This assignment will build on the previous one. In preparation for the next step,
+		use your favorite search engine to learn about inheritance, polymorphism, and abstract methods in Java.
+		</li><br><br>
+
+	<li><b>Make a class named Sprite</b>.
+		In video game terms, a "sprite" is a picture that moves, as opposed to a "background tile". Make both the Brick and Mario classes extend the Sprite class.
+		Move the member variables that store the x and y position into the Sprite class (since position is something that all sprites have in common).
+		<font color=red><b>Remember that you should only have one copy of the variables in the Sprite
+		class, and they should NOT be duplicated in either Mario or Brick.  You won't get a compile
+		error, but you will get uninitialized values by using the wrong copy of the same variable!</b></font>
+		</li><br><br>
+
+	<li><b>Use polymorphism to animate your sprites</b>.
+		Add an abstract method to your Sprite class named "update".
+		Also, add an abstract method to your Sprite class named "draw".
+		Child classes will need to implement these two methods.
+		The update method should update the sprite.
+		The draw method should draw the sprite.
+		Change the type of your collection in your Model from ArrayList&lt;Brick&gt; to ArrayList&lt;Sprite&gt;.
+		Put the Mario instance in the same collection with all the Brick instances.
+		(It is okay to have a redundant Mario reference in your model.)
+		Change your View.paintComponent method so that it just iterates over all the sprites and calls Sprite.draw.
+		(It should not use the redundant Mario reference.)
+		After this change, your View should not know anything about the Mario or Brick classes.
+		It should only know that your game involves a collection of Sprites.
+		It should not contain any special code to handle Mario differently from the bricks.
+		Similarly, your Model.update method should no longer explicitly call Mario.update.
+		It should just iterate over the collection of Sprite instances and call Sprite.update.
+		Now, make your game work again.
+		To do this, you will have to move a lot of stuff around and make a lot of changes.
+		</li><br><br>
+
+	<li><b>Clean up your code</b>.
+		Make sure all of your logic is found somewhere that makes sense.
+		For example, if your collision-detection still only works between a Mario and a Brick,
+		convert it to a general-purpose function that detects collisions between any two sprites.
+		</li><br><br>
+
+	<li><b>Ponder the elegance of how you have improved your code</b>.
+		Your game does not do any different than it did before the previous two steps.
+		So, why did we do all of that work?
+		Well, your code is now structured differently.
+		Before, your Model and View had to know what kind of game they were implementing.
+		Now, your Model and View are mostly generic, suitable for supporting pretty-much any billboard-style video game.
+		Imagine that your game involved hundreds of different types of sprites.
+		(Most interesting video games involve at least several hundred different types of sprites.)
+		If you kept your previous code structure (without polymorphism), your Model and View would become very complex to support so many different types of things.
+		As you added more and more things to your game, the task of adding new things would become increasingly cumbersome.
+		Basically, your game would eventually become so cumbersome to modify, that no one would ever want to do the work necessary to make it the paragon of awesomeness that is the true destiny of your game.
+		With polymorphism, however, each Sprite now encapsulates all of the logic needed for it to participate in the game.
+		In other words, your game is plug-able.<br><br>
+
+		Good coding design tries to keep the engine (which usually consists of a Model, a View, and a Controller) as generic and as simple as possible,
+		and keeps all the complexity in the plug-able components. This is called a "modular design".
+		Modular code can scale to support very large projects without becoming more difficult to work with.
+		Thus, taking some time to keep your code organized can pay off in the long run.
+		As you add new features to your game in the following steps, try to keep your overall design as modular as possible.
+		That is, try to avoid putting special-purpose logic in your Model, View, or Controller classes.
+		</li><br><br>
+
+	<li><b>Add several coin-blocks to the game</b>.
+		There are some images on Blackboard that you can use, but please feel free to find or make some images that you prefer.
+		When Mario hits a coin block with his head, a coin should pop out.
+		(If Mario bumps the block rapidly, there should be multiple coins on the screen at the same time.)
+		The coin should start with a random horizontal velocity and a constant upward vertical velocity.
+		The coin should be pulled down by gravity.
+		When the coin falls off the bottom of the screen, it should be removed from the list of sprites.
+		After Mario bumps 5 coins out of the coin-block, it should change images to indicate that it contains no more coins.
+		</li><br><br>
+
+	<li><b>Submit</b>
+		Make a zip archive called Assignment5.zip containing your source files, image files, map .json file, and a working build script.  Do not include any additional folders.  You <b>must</b> include all images you are using and your map file.
+		Do not submit any .class files or .jar files. Your build script should build and execute the program appropriately.
+		Test your zip file before you submit it by extracting into a separate folder and running your build script.
+		Finally, go the course web site on Blackboard (<a href="https://learn.uark.edu">https://learn.uark.edu/</a>) and submit your zip archive for Assignment5.</li><br><br>
+</ol>
+<ul>
+	<li><b>Final Notes</b>
+		Be sure to check the assignment listing on Blackboard for any possible updates to what is expected for this assignment.  Anything that was specified in class or on Blackboard is also part of this project.  Also, you should not have extraneous debug statements being printed in the program that you turn in.  Remember that you can add additional functionality to your game; for instance, you can use both the space bar <i>and</i> the up arrow to control jumping, but you <b>must at least</b> have the space bar enabled since that is what will be graded.
+		</li><br><br>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>FAQ:</h2>
+<ol>
+	<li><b>Q: How can I tell which mouse button was clicked?</b><br>
+		A: The MouseEvent.getButton() method tells which button was clicked.
+		The right mouse button is MouseEvent.BUTTON3.
+		</li><br><br>
+
+	<li><b>Q: For responding to jumping, can we have a redundant reference to the Mario instance in the model?</b><br>
+		A: Certainly. In fact, I strongly recommend having a redundant reference in your model for this purpose.
+		Just make sure that your Model.update method does not use it (because I am trying to force you to use polymorphism there).
+		Also, View.paintComponent should not use it.
+		</li><br><br>
+
+	<li><b>Q: The animation is rather jerky. How can I make it smoother?</b><br>
+		A: I added a member variable of type java.awt.Robot to my Game class. In Game.actionPerformed, I call Robot.mouseWheel(0).
+		That seems to trick Java into thinking the mouse is doing something, so it refreshes a bit faster.
+		</li><br><br>
+
+	<li><b>I'm getting an IIOException that says "Can't read input file!". How do I fix that?</b><br>
+		A: Make sure you know what directory you are executing within.
+		Here is a command to print the current working directory:
+<pre class="code">
+System.out.println("cwd=" + System.getProperty("user.dir"));
+</pre>
+		If you are running inside an IDE, the problem is probably caused by the IDE starting in an unexpected folder.
+		The solution is to tell the IDE what folder to start in.
+		Eclipse &lt;sarcasm&gt;conveniently&lt;/sarcasm&gt; provides this setting in project-&gt;properties-&gt;Run/Debug Settings-&gt;Default configuration-&gt;Edit-&gt;Arguments-&gt;Working Directory-&gt;Other.
+		</li><br><br>
+
+	<li><b>Q: How can I determine whether some Sprite, s, is a Brick or a Mario or a Goomba?</b><br>
+		A: One good solution is to add an abstract method to your Sprite class, like this:
+<pre class="code">
+abstract boolean isBrick();
+</pre>
+			You could implement Brick.isBrick like this:
+<pre class="code">
+boolean isBrick() { return true; }
+</pre>
+			You could implement Mario.isBrick like this:
+<pre class="code">
+boolean isBrick() { return false; }
+</pre>
+		(Another solution is to use "instanceof". However, some languages, like C++, have no equivalent of "instanceof",
+		so your skills will be slightly more portable if you avoid using "instanceof".
+		Since you are in school, please use the isBrick solution.)
+		</li><br><br>
+<!--
+	<li><b>Q: Help, my collision detection stopped working. How do I debug it?</b><br>
+		A:<ol>
+			<li>Make your code deterministic. (You can do this by seeding your random number generator with a constant value.)</li>
+			<li>Test that your code is really deterministic. (Do the bricks appear in the same random places every time? If not, you probably have multiple random number generators in your code. Is there one in every brick?)</li>
+			<li>Temporarily turn off gravity (so your bird will just hover). You can turn it back on after you are done debugging.</li>
+			<li>In your Bird constructor, add a line such as "y=246;" to set the vertical position of the bird to wherever it needs to be to reproduce the problem (probably not 246).
+				Now, you can reproduce the problem consistently and deterministically every time you run your program.</li>
+			<li>Add a frame counter, and print the frame number to the console. (1, 2, 3, 4, ...)</li>
+			<li>Run your program again and watch the bird hover into a brick. Note approximately which frame the collision detection fails to work on. (For example, let's say it fails in frame 493.)</li>
+			<li>Add a line of code just before your collision detection code that says
+<pre class="code">
+if(frameCount == 493) {
+      System.out.println("put a breakpoint here");
+}
+</pre>
+				and put a breakpoint on the print line.</li>
+			<li>Run in the debugger until it hits your breakpoint, which is right before the problem occurs. (If you didn't get it exactly right, that's okay. Just adjust the fram number until it breaks right before the problem.)</li>
+			<li>Step through your collision detection code. Look at your variable values. See why your collision detection code does not do what it is supposed to do.</li>
+			<li>Fix the problem.</li>
+		</ol>
+		</li><br><br>
+-->
+</ol>
+
+</td></tr></table>
+</body></html>
