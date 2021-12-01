@@ -10,6 +10,7 @@
         this.vert_velocity = 0;
         this.isMario = true;
         
+        // put images in array
         for(let i = 1; i < 6; i++) {
             let temp = new Image();
             temp.src = ("mario" + i + ".png")

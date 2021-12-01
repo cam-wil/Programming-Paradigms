@@ -20,6 +20,7 @@ class Coin extends Sprite {
         }
     }
 
+    // draw the coin
     draw(ctx) {
         ctx.drawImage(this.image, this.x - game.model.cameraPos, this.y, 50, 50);
     }

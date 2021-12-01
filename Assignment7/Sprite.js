@@ -1,7 +1,5 @@
-class Sprite
-{
-	constructor(x, y, w, h, model)
-	{
+class Sprite {
+	constructor(x, y, w, h, model) {
 		// basic structure of sprites including a model reference
 		this.x = x;
 		this.y = y;
