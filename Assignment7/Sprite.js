@@ -19,4 +19,6 @@ class Sprite
 	}
 
 	update() {}
+
+	draw() {}
 }
